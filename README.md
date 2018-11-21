@@ -128,6 +128,7 @@ data.set_index('Month', inplace = True)
 
 
 ```python
+# check the head and the new index
 data.head()
 data.index
 
@@ -159,7 +160,7 @@ Now that we have successfully created a TS object, we can use simple `plot()` fu
 
 
 ```python
-# Plot the time-series ts
+# Plot the time series data
 data.plot(figsize=(12,6), linewidth=2, fontsize=10);
 ```
 
