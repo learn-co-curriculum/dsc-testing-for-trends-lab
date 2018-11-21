@@ -23,14 +23,6 @@ This dataset is stored as `passengers.csv`.
 ```python
 # Import necessary libraries
 
-import pandas as pd
-from pandas import Series
-import numpy as np
-import matplotlib.pylab as plt
-%matplotlib inline
-
-#from matplotlib.pylab import rcParams
-#rcParams['figure.figsize'] = 15, 6
 ```
 
 Import `passengers.csv` and view the head.
@@ -38,8 +30,6 @@ Import `passengers.csv` and view the head.
 
 ```python
 # Read the dataset 'passengers.csv' and view the head
-data = pd.read_csv('passengers.csv')
-data.head()
 
 # Month	#Passengers
 # 0	1949-01-01	112
@@ -111,10 +101,7 @@ Change the `Month` column over to a `datetime` object and make sure it is set as
 
 ```python
 # Set month column as a timeseries object, and make it the index
-data.Month = pd.to_datetime(data.Month)
-data.info()
 
-data.set_index('Month', inplace = True)
 ```
 
     <class 'pandas.core.frame.DataFrame'>
@@ -128,8 +115,8 @@ data.set_index('Month', inplace = True)
 
 
 ```python
-data.head()
-data.index
+# check the head and the new index
+
 
 # DatetimeIndex(['1949-01-01', '1949-02-01', '1949-03-01', '1949-04-01',
 #                '1949-05-01', '1949-06-01', '1949-07-01', '1949-08-01',
@@ -159,8 +146,8 @@ Now that we have successfully created a TS object, we can use simple `plot()` fu
 
 
 ```python
-# Plot the time-series ts
-data.plot(figsize=(12,6), linewidth=2, fontsize=10);
+# Plot the time series data 
+
 ```
 
 
@@ -177,20 +164,12 @@ Use the `.rolling()` function to find rolling mean and rolling std with a window
 ```python
 #Determine rolling statistics
 
-rolmean = data.rolling(window = 12, center = False).mean()
-rolstd = data.rolling(window = 12, center = False).std()
 ```
 
 
 ```python
 #Plot rolling statistics
-fig = plt.figure(figsize=(12,6))
-orig = plt.plot(data, color='blue',label='Original')
-mean = plt.plot(rolmean, color='red', label='Rolling Mean')
-std = plt.plot(rolstd, color='black', label = 'Rolling Std')
-plt.legend(loc='best')
-plt.title('Rolling Mean & Standard Deviation')
-plt.show()
+
 ```
 
 
@@ -208,15 +187,8 @@ Use the Dickey-Fuller Test to verify your visual result.
 from statsmodels.tsa.stattools import adfuller
 
 #Perform Dickey-Fuller test:
-print ('Results of Dickey-Fuller Test:')
-dftest = adfuller(data['#Passengers'])
 
 # Extract and display test results in a user friendly manner
-dfoutput = pd.Series(dftest[0:4], index=['Test Statistic','p-value','#Lags Used','Number of Observations Used'])
-for key,value in dftest[4].items():
-    dfoutput['Critical Value (%s)'%key] = value
-print (dfoutput)
-
 
 # Results of Dickey-Fuller Test:
 # Test Statistic                   0.815369
