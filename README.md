@@ -156,7 +156,7 @@ data.index
 
 
 
-Now that we have successfully created a TS object, we can use simple `plot()` function in pandas to visually incpect this time-series.
+Now that we have successfully created a TS object, we can use simple `plot()` function in pandas to visually inspect this time-series.
 
 
 ```python
@@ -249,4 +249,4 @@ Repeat the previous steps for the NYSE monthly data , stored in "NYSE_monthly.cs
 
 ## Summary
 
-In this lab, we learnt to check for the stationarity of a time-series object in Python. Next, we'll further explore stationarity and how to make sure to make time series stationary!
+In this lab, you learned how to check for the stationarity of a time-series object in Python. Next, we'll further explore stationarity and how to make sure to make time series stationary!
