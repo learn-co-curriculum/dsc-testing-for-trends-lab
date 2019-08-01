@@ -55,63 +55,6 @@ Import `passengers.csv` and view the head.
 ```
 
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Month</th>
-      <th>#Passengers</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1949-01-01</td>
-      <td>112</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1949-02-01</td>
-      <td>118</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1949-03-01</td>
-      <td>132</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1949-04-01</td>
-      <td>129</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1949-05-01</td>
-      <td>121</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
 ```python
 # __SOLUTION__ 
 # Read the dataset 'passengers.csv' and view the head
@@ -191,15 +134,6 @@ Change the `Month` column over to a `datetime` object and make sure it is set as
 
 ```
 
-    <class 'pandas.core.frame.DataFrame'>
-    RangeIndex: 144 entries, 0 to 143
-    Data columns (total 2 columns):
-    Month          144 non-null datetime64[ns]
-    #Passengers    144 non-null int64
-    dtypes: datetime64[ns](1), int64(1)
-    memory usage: 2.3 KB
-
-
 
 ```python
 # __SOLUTION__ 
@@ -233,20 +167,6 @@ data.set_index('Month', inplace = True)
 #                '1960-11-01', '1960-12-01'],
 #               dtype='datetime64[ns]', name='Month', length=144, freq=None)
 ```
-
-
-
-
-    DatetimeIndex(['1949-01-01', '1949-02-01', '1949-03-01', '1949-04-01',
-                   '1949-05-01', '1949-06-01', '1949-07-01', '1949-08-01',
-                   '1949-09-01', '1949-10-01',
-                   ...
-                   '1960-03-01', '1960-04-01', '1960-05-01', '1960-06-01',
-                   '1960-07-01', '1960-08-01', '1960-09-01', '1960-10-01',
-                   '1960-11-01', '1960-12-01'],
-                  dtype='datetime64[ns]', name='Month', length=144, freq=None)
-
-
 
 
 ```python
@@ -288,10 +208,6 @@ Now that we have successfully created a TS object, we can use simple `plot()` fu
 ```
 
 
-![png](index_files/index_13_0.png)
-
-
-
 ```python
 # __SOLUTION__ 
 # Plot the time series data
@@ -328,10 +244,6 @@ rolstd = data.rolling(window = 12, center = False).std()
 #Plot rolling statistics
 
 ```
-
-
-![png](index_files/index_19_0.png)
-
 
 
 ```python
@@ -375,17 +287,6 @@ from statsmodels.tsa.stattools import adfuller
 # dtype: float64
 ```
 
-    Results of Dickey-Fuller Test:
-    Test Statistic                   0.815369
-    p-value                          0.991880
-    #Lags Used                      13.000000
-    Number of Observations Used    130.000000
-    Critical Value (1%)             -3.481682
-    Critical Value (5%)             -2.884042
-    Critical Value (10%)            -2.578770
-    dtype: float64
-
-
 
 ```python
 # __SOLUTION__ 
@@ -423,8 +324,6 @@ print (dfoutput)
     Critical Value (10%)            -2.578770
     dtype: float64
 
-
-## Conclusion here
 
 ## Level up - Optional
 
