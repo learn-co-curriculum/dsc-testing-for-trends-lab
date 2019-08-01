@@ -39,63 +39,6 @@ Import `passengers.csv` and view the head.
 # 4	1949-05-01	121
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Month</th>
-      <th>#Passengers</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1949-01-01</td>
-      <td>112</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1949-02-01</td>
-      <td>118</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1949-03-01</td>
-      <td>132</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1949-04-01</td>
-      <td>129</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1949-05-01</td>
-      <td>121</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
 Change the `Month` column over to a `datetime` object and make sure it is set as the index.
 
 
@@ -103,15 +46,6 @@ Change the `Month` column over to a `datetime` object and make sure it is set as
 # Set month column as a timeseries object, and make it the index
 
 ```
-
-    <class 'pandas.core.frame.DataFrame'>
-    RangeIndex: 144 entries, 0 to 143
-    Data columns (total 2 columns):
-    Month          144 non-null datetime64[ns]
-    #Passengers    144 non-null int64
-    dtypes: datetime64[ns](1), int64(1)
-    memory usage: 2.3 KB
-
 
 
 ```python
@@ -128,20 +62,6 @@ Change the `Month` column over to a `datetime` object and make sure it is set as
 #               dtype='datetime64[ns]', name='Month', length=144, freq=None)
 ```
 
-
-
-
-    DatetimeIndex(['1949-01-01', '1949-02-01', '1949-03-01', '1949-04-01',
-                   '1949-05-01', '1949-06-01', '1949-07-01', '1949-08-01',
-                   '1949-09-01', '1949-10-01',
-                   ...
-                   '1960-03-01', '1960-04-01', '1960-05-01', '1960-06-01',
-                   '1960-07-01', '1960-08-01', '1960-09-01', '1960-10-01',
-                   '1960-11-01', '1960-12-01'],
-                  dtype='datetime64[ns]', name='Month', length=144, freq=None)
-
-
-
 Now that we have successfully created a TS object, we can use simple `plot()` function in pandas to visually inspect this time-series.
 
 
@@ -149,10 +69,6 @@ Now that we have successfully created a TS object, we can use simple `plot()` fu
 # Plot the time series data 
 
 ```
-
-
-![png](index_files/index_9_0.png)
-
 
 It is clearly evident that there is an overall increasing trend in the data along with some seasonal variations. However, it might not always be possible to make such visual inferences. Let's reconfirm this here using both **rolling statistics** and 
 
@@ -171,10 +87,6 @@ Use the `.rolling()` function to find rolling mean and rolling std with a window
 #Plot rolling statistics
 
 ```
-
-
-![png](index_files/index_13_0.png)
-
 
 Though the variation in standard deviation is small, mean is clearly increasing with time and thus, this is not a stationary series. 
 
@@ -200,19 +112,6 @@ from statsmodels.tsa.stattools import adfuller
 # Critical Value (10%)            -2.578770
 # dtype: float64
 ```
-
-    Results of Dickey-Fuller Test:
-    Test Statistic                   0.815369
-    p-value                          0.991880
-    #Lags Used                      13.000000
-    Number of Observations Used    130.000000
-    Critical Value (1%)             -3.481682
-    Critical Value (5%)             -2.884042
-    Critical Value (10%)            -2.578770
-    dtype: float64
-
-
-## Conclusion here
 
 ## Level up - Optional
 
