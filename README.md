@@ -241,12 +241,10 @@ print (dfoutput)
     dtype: float64
 
 
-## Conclusion here
-
 ## Level up - Optional
 
 Repeat the previous steps for the NYSE monthly data , stored in "NYSE_monthly.csv".
 
 ## Summary
 
-In this lab, you learned how to check for the stationarity of a time-series object in Python. Next, we'll further explore stationarity and how to make sure to make time series stationary!
+In this lab, you learned to check for the stationarity of a time-series object in Python. Next, we'll further explore stationarity and how to make sure to make time series stationary!
