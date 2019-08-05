@@ -156,7 +156,7 @@ data.index
 
 
 
-Now that we have successfully created a TS object, we can use simple `plot()` function in pandas to visually inspect this time-series.
+Now that we have successfully created a TS object, we can use the `plot()` function in pandas to visually inspect this time-series.
 
 
 ```python
@@ -168,11 +168,12 @@ data.plot(figsize=(12,6), linewidth=2, fontsize=10);
 ![png](index_files/index_9_0.png)
 
 
-It is clearly evident that there is an overall increasing trend in the data along with some seasonal variations. However, it might not always be possible to make such visual inferences. Let's reconfirm this here using both **rolling statistics** and 
+It is clearly evident that there is an overall increasing trend in the data along with some seasonal variations. However, it might not always be possible to make such visual inferences. Let's reconfirm this here using both **rolling statistics** and the 
+**Dickey-Fuller Test**.
 
 ## Rolling Statistics 
 
-Use the `.rolling()` function to find rolling mean and rolling std with a window of 12 months. Plot the original curve along with the rolling mean and standard error.
+Use the `.rolling()` function to find the rolling mean and rolling std with a window of 12 months. Plot the original curve along with the rolling mean and standard error.
 
 
 ```python
@@ -198,7 +199,7 @@ plt.show()
 ![png](index_files/index_13_0.png)
 
 
-Though the variation in standard deviation is small, mean is clearly increasing with time and thus, this is not a stationary series. 
+Though the variation in standard deviation is small, the mean is clearly increasing with time and thus, this is not a stationary series. 
 
 ## Dickey-Fuller Test 
 
