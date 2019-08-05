@@ -62,7 +62,7 @@ Change the `Month` column over to a `datetime` object and make sure it is set as
 #               dtype='datetime64[ns]', name='Month', length=144, freq=None)
 ```
 
-Now that we have successfully created a TS object, we can use simple `plot()` function in pandas to visually inspect this time-series.
+Now that we have successfully created a TS object, we can use the `plot()` function in pandas to visually inspect this time-series.
 
 
 ```python
@@ -70,11 +70,12 @@ Now that we have successfully created a TS object, we can use simple `plot()` fu
 
 ```
 
-It is clearly evident that there is an overall increasing trend in the data along with some seasonal variations. However, it might not always be possible to make such visual inferences. Let's reconfirm this here using both **rolling statistics** and 
+It is clearly evident that there is an overall increasing trend in the data along with some seasonal variations. However, it might not always be possible to make such visual inferences. Let's reconfirm this here using both **rolling statistics** and the 
+**Dickey-Fuller Test**.
 
 ## Rolling Statistics 
 
-Use the `.rolling()` function to find rolling mean and rolling std with a window of 12 months. Plot the original curve along with the rolling mean and standard error.
+Use the `.rolling()` function to find the rolling mean and rolling std with a window of 12 months. Plot the original curve along with the rolling mean and standard error.
 
 
 ```python
@@ -88,7 +89,7 @@ Use the `.rolling()` function to find rolling mean and rolling std with a window
 
 ```
 
-Though the variation in standard deviation is small, mean is clearly increasing with time and thus, this is not a stationary series. 
+Though the variation in standard deviation is small, the mean is clearly increasing with time and thus, this is not a stationary series. 
 
 ## Dickey-Fuller Test 
 
