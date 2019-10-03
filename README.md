@@ -3,7 +3,7 @@
 
 ## Introduction
 
-In this lab, you'll practice your knowledge on testing for stationarity.
+In this lab, you'll practice your knowledge of testing for stationarity.
 
 ## Objectives
 
@@ -11,7 +11,7 @@ You will be able to:
 
 * Check and comment on the stationarity of time series data 
 * Use rolling statistics as an initial check for stationarity 
-* Use the Dickey Fuller Test for performing statistical testing for time series stationarity
+* Use the Dickey-Fuller Test for performing statistical testing for time series stationarity
 
 ## Importing the data
 
@@ -70,7 +70,7 @@ Now that we have successfully created a TS object, we can use the `plot()` funct
 
 ```
 
-It is clearly evident that there is an overall increasing trend in the data along with some seasonal variations. However, it might not always be possible to make such visual inferences. Let's reconfirm this here using both **rolling statistics** and the 
+Wec can see that that there is an overall increasing trend in the data along with some seasonal variations. However, it might not always be possible to make such visual inferences. Let's reconfirm this here using both **rolling statistics** and the 
 **Dickey-Fuller Test**.
 
 ## Rolling Statistics 
@@ -89,7 +89,7 @@ Use the `.rolling()` function to find the rolling mean and rolling std with a wi
 
 ```
 
-Though the variation in standard deviation is small, the mean is clearly increasing with time and thus, this is not a stationary series. 
+Though the variation in standard deviation is small, the mean is increasing with time and thus, this is not a stationary series. 
 
 ## Dickey-Fuller Test 
 
