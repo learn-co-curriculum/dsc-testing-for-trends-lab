@@ -9,44 +9,33 @@ In this lab, you'll practice your knowledge of testing for stationarity.
 
 You will be able to:
 
-* Check and comment on the stationarity of time series data 
-* Use rolling statistics as an initial check for stationarity 
-* Use the Dickey-Fuller Test for performing statistical testing for time series stationarity
+- Use rolling statistics as a check for stationarity 
+- Use the Dickey-Fuller test and conclude whether or not a dataset is exhibiting stationarity 
 
 ## Importing the data
 
-Let's look at some new data. In this lab, We'll work by creating a time-series object in Python by using the popular [Air Passengers dataset](https://www.analyticsvidhya.com/wp-content/uploads/2016/02/AirPassengers.csv).
+Let's look at some new data. In this lab, we'll work with a time series in Python by using the popular [Air Passengers dataset](https://www.analyticsvidhya.com/wp-content/uploads/2016/02/AirPassengers.csv).
 
-This dataset is stored as `passengers.csv`.
+Start by running the cell below to import the necessary libraries. 
 
 
 ```python
 # Import necessary libraries
-
 import pandas as pd
-from pandas import Series
 import numpy as np
 import matplotlib.pylab as plt
 %matplotlib inline
-
-#from matplotlib.pylab import rcParams
-#rcParams['figure.figsize'] = 15, 6
 ```
 
-Import `passengers.csv` and view the head.
+The dataset is stored in `'passengers.csv'`. Import it and view the first five rows. 
 
 
 ```python
-# Read the dataset 'passengers.csv' and view the head
+# Import 'passengers.csv'
 data = pd.read_csv('passengers.csv')
-data.head()
 
-# Month	#Passengers
-# 0	1949-01-01	112
-# 1	1949-02-01	118
-# 2	1949-03-01	132
-# 3	1949-04-01	129
-# 4	1949-05-01	121
+# View the first five rows
+data.head()
 ```
 
 
@@ -106,40 +95,21 @@ data.head()
 
 
 
-Change the `Month` column over to a `datetime` object and make sure it is set as the index.
+Change the `'Month'` column over to a `datetime` type and make sure it is set as the index of the DataFrame. 
 
 
 ```python
-# Set month column as a timeseries object, and make it the index
-data.Month = pd.to_datetime(data.Month)
-data.info()
+# Change the type of 'Month' to datetime
+data['Month'] = pd.to_datetime(data['Month'])
 
+# Set 'Month' as the index
 data.set_index('Month', inplace = True)
 ```
 
-    <class 'pandas.core.frame.DataFrame'>
-    RangeIndex: 144 entries, 0 to 143
-    Data columns (total 2 columns):
-    Month          144 non-null datetime64[ns]
-    #Passengers    144 non-null int64
-    dtypes: datetime64[ns](1), int64(1)
-    memory usage: 2.3 KB
-
-
 
 ```python
-# check the head and the new index
-data.head()
+# Check the index
 data.index
-
-# DatetimeIndex(['1949-01-01', '1949-02-01', '1949-03-01', '1949-04-01',
-#                '1949-05-01', '1949-06-01', '1949-07-01', '1949-08-01',
-#                '1949-09-01', '1949-10-01',
-#                ...
-#                '1960-03-01', '1960-04-01', '1960-05-01', '1960-06-01',
-#                '1960-07-01', '1960-08-01', '1960-09-01', '1960-10-01',
-#                '1960-11-01', '1960-12-01'],
-#               dtype='datetime64[ns]', name='Month', length=144, freq=None)
 ```
 
 
@@ -156,7 +126,7 @@ data.index
 
 
 
-Now that we have successfully created a TS object, we can use the `plot()` function in pandas to visually inspect this time-series.
+Now that we have successfully created a time series, we can use the `.plot()` method in pandas to visually inspect this time series.
 
 
 ```python
@@ -168,28 +138,26 @@ data.plot(figsize=(12,6), linewidth=2, fontsize=10);
 ![png](index_files/index_9_0.png)
 
 
-Wec can see that that there is an overall increasing trend in the data along with some seasonal variations. However, it might not always be possible to make such visual inferences. Let's reconfirm this here using both **rolling statistics** and the 
-**Dickey-Fuller Test**.
+Wec can see that that there is an overall increasing trend in the data along with some seasonal variations. However, it might not always be possible to make such visual inferences. Let's reconfirm this here using both **rolling statistics** and the **Dickey-Fuller test**.
 
 ## Rolling Statistics 
 
-Use the `.rolling()` function to find the rolling mean and rolling std with a window of 12 months. Plot the original curve along with the rolling mean and standard error.
+Use the `.rolling()` method to find the rolling mean and rolling std with a window of 12 months. Plot the original curve along with the rolling mean and standard error.
 
 
 ```python
-#Determine rolling statistics
-
-rolmean = data.rolling(window = 12, center = False).mean()
-rolstd = data.rolling(window = 12, center = False).std()
+# Determine rolling statistics
+roll_mean = data.rolling(window=12, center=False).mean()
+roll_std = data.rolling(window=12, center=False).std()
 ```
 
 
 ```python
-#Plot rolling statistics
+# Plot rolling statistics
 fig = plt.figure(figsize=(12,6))
-orig = plt.plot(data, color='blue',label='Original')
-mean = plt.plot(rolmean, color='red', label='Rolling Mean')
-std = plt.plot(rolstd, color='black', label = 'Rolling Std')
+plt.plot(data, color='blue',label='Original')
+plt.plot(roll_mean, color='red', label='Rolling Mean')
+plt.plot(roll_std, color='black', label = 'Rolling Std')
 plt.legend(loc='best')
 plt.title('Rolling Mean & Standard Deviation')
 plt.show()
@@ -203,35 +171,25 @@ Though the variation in standard deviation is small, the mean is increasing with
 
 ## Dickey-Fuller Test 
 
-Use the Dickey-Fuller Test to verify your visual result.
+Use the Dickey-Fuller test to verify your visual result.
 
 
 ```python
 from statsmodels.tsa.stattools import adfuller
 
-#Perform Dickey-Fuller test:
-print ('Results of Dickey-Fuller Test:')
+# Perform Dickey-Fuller test:
+print ('Results of Dickey-Fuller Test: \n')
 dftest = adfuller(data['#Passengers'])
 
 # Extract and display test results in a user friendly manner
-dfoutput = pd.Series(dftest[0:4], index=['Test Statistic','p-value','#Lags Used','Number of Observations Used'])
+dfoutput = pd.Series(dftest[0:4], index=['Test Statistic', 'p-value', '#Lags Used', 'Number of Observations Used'])
 for key,value in dftest[4].items():
     dfoutput['Critical Value (%s)'%key] = value
-print (dfoutput)
-
-
-# Results of Dickey-Fuller Test:
-# Test Statistic                   0.815369
-# p-value                          0.991880
-# #Lags Used                      13.000000
-# Number of Observations Used    130.000000
-# Critical Value (1%)             -3.481682
-# Critical Value (5%)             -2.884042
-# Critical Value (10%)            -2.578770
-# dtype: float64
+print(dfoutput)
 ```
 
-    Results of Dickey-Fuller Test:
+    Results of Dickey-Fuller Test: 
+    
     Test Statistic                   0.815369
     p-value                          0.991880
     #Lags Used                      13.000000
@@ -242,10 +200,6 @@ print (dfoutput)
     dtype: float64
 
 
-## Level up - Optional
-
-Repeat the previous steps for the NYSE monthly data , stored in "NYSE_monthly.csv".
-
 ## Summary
 
-In this lab, you learned to check for the stationarity of a time-series object in Python. Next, we'll further explore stationarity and how to make sure to make time series stationary!
+In this lab, you checked for the stationarity of a time series in Python. Next, we'll further explore stationarity and how to make sure to make time series stationary!
